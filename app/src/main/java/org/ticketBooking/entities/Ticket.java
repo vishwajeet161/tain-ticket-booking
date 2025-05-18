@@ -1,5 +1,11 @@
 package org.ticketBooking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Ticket {
 
     private String ticketId;
@@ -25,27 +31,27 @@ public class Ticket {
 
     //getters
     public String getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public String getDateOfTravel() {
-        return dateOfTravel;
+        return this.dateOfTravel;
     }
 
     public String getDestination() {
-        return destination;
+        return this.destination;
     }
 
     public String getSource() {
-        return source;
+        return this.source;
     }
 
     public String getTicketId() {
-        return ticketId;
+        return this.ticketId;
     }
 
     public Train getTrain() {
-        return train;
+        return this.train;
     }
 
     //setters
@@ -74,7 +80,7 @@ public class Ticket {
     }
 
     public String getTicketInfo() {
-        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s",ticketId, userId, source, destination, dateOfTravel);
+        return String.format("Ticket ID: %s belongs to User %s from %s to %s on %s",this.ticketId, this.userId, this.source, this.destination, this.dateOfTravel);
     }
 
 }
