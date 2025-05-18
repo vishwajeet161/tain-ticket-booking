@@ -2,6 +2,7 @@ package org.ticketBooking.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.ticketBooking.entities.Ticket;
 import org.ticketBooking.entities.User;
 import org.ticketBooking.util.UserServiceUtil;
 
@@ -20,10 +21,17 @@ public class UserBookingService {
 
     public UserBookingService(User user1) throws IOException {
         this.user = user1;
-        File users = new File(USER_PATH);
-        userList = objMapper.readValue(users, new TypeReference<List<User>>() {});
+        this.userList = this.loadUsers();
     }
 
+    public UserBookingService() throws IOException{
+        this.userList = loadUsers();
+    }
+
+    public List<User> loadUsers() throws IOException{
+        File users = new File(USER_PATH);
+        return  objMapper.readValue(users, new TypeReference<List<User>>() {});
+    }
     public Boolean loginUser(){
         Optional<User> foundUser = userList.stream().filter(user1 ->{
             return user1.getName().equalsIgnoreCase(user.getName()) && UserServiceUtil.checkPassword(user.getPassword(),user1.getHashPassword());
@@ -52,6 +60,9 @@ public class UserBookingService {
     }
 
     public Boolean cancelBooking(String ticketId){
+//        Optional<User> ticketFound = userList.stream().filter(user1->{
+//           return user1.getUserId().equalsIgnoreCase()
+//        });
         return Boolean.FALSE;
     }
 
